@@ -4,6 +4,7 @@ const highscoreElement = document.querySelector(".high-score");
 const eatSound = document.getElementById("eatSound");
 const wallSound = document.getElementById("wallSound");
 const selfHitSound = document.getElementById("selfHitSound");
+const controls = document.querySelectorAll(".controls i");
 
 let gameOver = false;
 let foodX , foodY;
@@ -56,6 +57,9 @@ document.getElementById("replayBtn").addEventListener("click", () => {
     location.reload();
 });
 
+controls.forEach(key => {
+  key.addEventListener("click", () => changeDirection({key: key.dataset.key }))
+});
 
 const initGame = () =>{
     if(gameOver) return handleGameOver();
