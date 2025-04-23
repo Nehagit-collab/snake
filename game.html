@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>snake game</title>
+    <link rel="stylesheet" href="style.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="game-details">
+            <span class="score">Score : 0</span>
+            <span class="high-score">High score : 0</span>
+        </div>
+        <div class="play-board">
+        </div>
+    </div>
+    <div class="controls">
+        <i data-key="ArrowLeft" class='bx bx-left-arrow-alt'></i>
+        <i data-key="ArrowUp"  class='bx bx-up-arrow-alt'></i>
+        <i data-key="ArrowRight" class='bx bx-right-arrow-alt'></i>
+        <i data-key="ArrowDown"  class='bx bx-down-arrow-alt'></i>
+    </div>
+
+    <div id="gameOverPopup" class="popup">
+        <div class="popup-content">
+            <p id="gameOverMessage">Game Over! Your score: 0</p>
+            <button id="replayBtn">OK</button>
+        </div>
+    </div>
+    
+    
+      <audio id="eatSound" src="s2 (2).wav"></audio>
+<audio id="wallSound" src="s2 (1).wav"></audio>
+<audio id="selfHitSound" src="s3.wav"></audio>
+
+   
+
+<div id="snakeEmotion" ></div>
+<button id="muteToggleBtn"><i class='bx bx-volume-full'></i></button>
+<button id="pauseBtn"><i class='bx bx-pause' ></i></button>
+<button id="exit"> Exit</button>
+<button id="startGameBtn">Start Game</button>
+<button id="settings"><i class='bx bxs-cog'></i></button>
+
+
+
+</body>
+</html>

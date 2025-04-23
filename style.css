@@ -9,11 +9,16 @@ body{
     align-items:center;
     justify-content: center;
     min-height: 100vh;
+    background: url(mainbg.png);
+    background-size: cover;
+    background-position:center;
+    justify-content: center;
+    align-items: center;
 }
 .wrapper{
-    width: 65vmin;
-    height: 76vmin;
-    background: rgb(37, 35, 45);
+    width: 120vmin;
+    height: 70vmin;
+    background: rgb(45, 41, 35);
     border-radius: 20px;
     display: flex;
     overflow: hidden;
@@ -27,78 +32,331 @@ body{
     display: flex;
     justify-content: space-between;
 }
-.play-board{
-    width: 100%;
-    height: 100%;
-    background: black;
-    display: grid;
-    border: 7px solid rgb(139, 246, 0);
-    grid-template: repeat(30,1fr)/repeat(30,1fr);
+
+.play-board .food {
+
+  background-color: #ff4d4d; /* A bright red */
+  border-radius: 50%; 
+  width: 90%; 
+  height: 90%;
+  margin: auto; 
+  position: relative; 
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
-.play-board .food{
-    background: red;
-    border-radius: 50%;
+
+.play-board .food::before {
+  content: '';
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  width: 20%; 
+  height: 50%;
+  background-color: #228B22; 
+  border-radius: 50%;
+  transform: rotate(30deg);
 }
+
+
 .play-board .head{
-    background: rgb(0, 176, 0);
-    border-radius: 20%;
+    background: rgb(12, 214, 1);
+    border-radius: 40%;
+     
+}
+.play-board .special-food {
+  background-color: gold; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
 }
 
 .popup {
-    display: none; 
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-   background: transparent;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-  }
-  
-  .popup-content {
-    background: rgb(7, 7, 7);
-    padding: 30px;
-    color: red;
-    border-radius: 8px;
-    text-align: center;
-  }
-  #replayBtn{
-    margin: 20px;
-   border-radius: 15%;
-   background-color: rgb(255, 255, 255);
-   color: rgb(0, 0, 0);
-   padding: 5px 10px;
-   justify-content: center;
-   align-items: center;
-  }
+  display: none; 
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  align-items: center;
+  justify-content: center;
+}
 
+.popup-content {
+  background-color: rgb(0, 0, 0);
+  padding: 30px;
+  font-size: 25px;
+  color: rgb(0, 172, 0);
+  border-radius: 12px;
+  text-align: center;
+}
+
+#replayBtn {
+  margin-top: 10px;
+  padding: 10px;
+  font-size: 20px;
+  background-color: #ffffff;
+  color: rgb(0, 0, 0);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+
+/* And your moving glow animation rule: */
+@keyframes movingGlow {
+  0% {
+    box-shadow: 0 0 15px 5px rgba(255, 255, 255, 0.7), 0 0 30px 10px rgba(255, 255, 255, 0.5);
+  }
+  25% {
+    box-shadow: 10px 0 15px 5px rgba(255, 255, 255, 0.7), 20px 0 30px 10px rgba(255, 255, 255, 0.5);
+  }
+  50% {
+    box-shadow: 0 10px 15px 5px rgba(255, 255, 255, 0.7), 0 20px 30px 10px rgba(255, 255, 255, 0.5);
+  }
+  75% {
+    box-shadow: -10px 0 15px 5px rgba(255, 255, 255, 0.7), -20px 0 30px 10px rgba(255, 255, 255, 0.5);
+  }
+  100% {
+    box-shadow: 0 0 15px 5px rgba(255, 255, 255, 0.7), 0 0 30px 10px rgba(255, 255, 255, 0.5);
+  }
+}
+
+.glow {
+  animation: movingGlow 1s linear infinite;
+  z-index: 1000;
+}
   .controls {
-    display: flex;
-    flex-wrap: nowrap;
+    display: grid;
+    grid-template-columns: 50px 50px 50px;
+    grid-template-rows: 50px 50px 50px;
+    gap: 0px;
+    position: fixed; 
+    bottom: 90px;
+    left: 90px;
   }
   
   .controls i {
-    flex: 1; 
+    background-color: #040404;
     color: white;
-    padding: 10px;
-    text-align: center;
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
     cursor: pointer;
-    font-size: 1.5rem;
-    border-right: 1px solid black;
+    border: 2px solid #555;
   }
   
-  .controls i:last-child {
-    border-right: none;
+  .controls i:hover{
+    background-color: #333;
+    border-color: #fbff00;
+    box-shadow: 0 0 12px #ff9500;
+    transform: scale(1.1);
   }
- 
+  i[data-key="ArrowUp"] {
+    grid-column: 2;
+    grid-row: 1;
+  }
+  
+  i[data-key="ArrowLeft"] {
+    grid-column: 1;
+    grid-row: 2;
+  }
+  
+  i[data-key="ArrowRight"] {
+    grid-column: 3;
+    grid-row: 2;
+  }
+  
+  i[data-key="ArrowDown"] {
+    grid-column: 2;
+    grid-row: 3;
+  }
+  
+  
   #snakeEmotion {
-    font-size: 50px;
+    font-size: 45px;
     position: absolute;
-    top: 20px; 
+    top: 48px; 
     left: 50%; 
     transform: translateX(-50%);
     z-index: 1000;  
   }
-  
+  .play-board {
+    width: 100%;
+    height: 100%;
+    background: url('m5.png') no-repeat;
+    background-size: cover;
+    background-position: center;
+    display: grid;
+    border: 7px solid rgb(69, 49, 1);
+    grid-template: repeat(35, 1fr) / repeat(35, 1fr);
+    position: relative; 
+    overflow: hidden;
+}
+
+
+.play-board.flash::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    animation: backgroundFlash 0.5s ease;
+    z-index: 1000;
+    pointer-events: none;
+}
+
+@keyframes backgroundFlash {
+  0%   { background-color: rgba(255, 255, 255, 0); }
+  20%  { background-color: rgba(255, 255, 255, 0.8); }
+  100% { background-color: rgba(255, 255, 255, 0); }
+}
+
+.play-board.shake {
+  animation: shake-animation 0.4s ease-in-out, shake-color 0.4s ease-in-out;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+}
+
+@keyframes shake-animation {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-10px); }
+  50% { transform: translateX(10px); }
+  75% { transform: translateX(-10px); }
+  100% { transform: translateX(0); }
+}
+
+
+#muteToggleBtn {
+  position: absolute;
+  top: 50px;
+  right: 180px;
+  background-color: #1a1a1a;
+  color: #fff;
+  border: 2px solid #555;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.1);
+  z-index: 1000;
+}
+#muteToggleBtn i{
+  font-size: 24px;
+}
+#muteToggleBtn:hover {
+  background-color: #333;
+  border-color: #fbff00;
+  box-shadow: 0 0 12px #ff9500;
+  transform: scale(1.1);
+}
+
+#pauseBtn {
+  position: absolute;
+  top: 40px;
+  left: 120px;
+  background-color: #1a1a1a;
+  color: #fff;
+  border: 2px solid #555;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.1);
+  z-index: 1000;
+}
+#pauseBtn i{
+  font-size: 35px;
+}
+
+#pauseBtn:hover {
+  background-color: #333;
+  border-color: #ffcc00;
+  box-shadow: 0 0 12px #ffcc00;
+  transform: scale(1.1);
+}
+
+#settings {
+  position: absolute;
+  top: 50px;
+  right: 120px;
+  background-color: #1a1a1a;
+  color: #fff;
+  border: 2px solid #555;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.1);
+  z-index: 1000;
+}
+#settings  i{
+  font-size: 35px;
+}
+
+#settings:hover {
+  background-color: #333;
+  border-color: #ffcc00;
+  box-shadow: 0 0 12px #ffcc00;
+  transform: scale(1.1);
+}
+
+#exit {
+  position: absolute;
+  bottom: 80px;
+  right: 150px;
+  background-color: #1a1a1a;
+  color: #fff;
+  border: 2px solid #555;
+  border-radius:20px;
+  width: 80px;
+  height: 50px;
+  font-size: 22px;
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.1);
+  z-index: 1000;
+}
+#exit:hover {
+  background-color: #333;
+  border-color: #ffcc00;
+  box-shadow: 0 0 12px #ffcc00;
+  transform: scale(1.1);
+}
+#startGameBtn{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 15px 30px;
+  background-color: #FF6B6B;
+  color: white;
+  font-size: 25px;
+  border: 3px solid #FF4757;
+  border-radius: 10px;
+  cursor: pointer;
+  z-index: 10;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+  font-family: 'Comic Sans MS', cursive;
+}
+
+#startGameBtn:hover {
+  background-color: #FF4757;
+  border-color: #FF1E56;
+  transform: translate(-50%, -50%) scale(1.1);
+  box-shadow: 7px 7px 12px rgba(0, 0, 0, 0.4);
+}
