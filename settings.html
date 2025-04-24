@@ -6,264 +6,296 @@
     <title>Settings</title>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <style>
-        body {
-            font-family: sans-serif;
-            margin: 0;
-            background: url(bg1.jpg) no-repeat center center / cover;
-            display: flex;
-            background-position: 30%;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-        }
-        .settings-page {
-            background-color: #000000;
-            padding: 20px;
-            border-radius: 15px;
-            box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
-            text-align: center;
-            border: 3px solid #383838;
-            width: 90%; /* Adjust width for smaller screens */
-            max-width: 500px; /* Set a maximum width */
-        }
-        .settings-page h1 {
-            font-size: 2.5em;
-            color: #ffffff;
-            margin-bottom: 30px;
-            text-shadow: 2px 2px #000;
-            font-weight: 600;
-        }
-        .settings-section {
-            margin-bottom: 30px;
-            text-align: left;
-            padding: 15px;
-            border: 2px solid #000000;
-            border-radius: 8px;
-            background-color: #ffffff;
-        }
-        .settings-section label {
-            display: block;
-            margin-bottom: 10px;
-            font-weight: 800;
-            color: #000000;
-            font-size: 1.3em;
-        }
-        .settings-section select {
-            width: 100%;
-            padding: 15px;
-            border: 2px solid #1a8f00;
-            border-radius: 8px;
-            font-size: 1.2em;
-            color: #ffffff;
-            background-color:  #01691e;
-            appearance: none;
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            padding-right: 35px;
-            cursor: pointer;
-            font-weight: 700;
-            transition: border-color 0.3s ease, box-shadow 0.3s ease;
-        }
-        .settings-section select:focus {
-            outline: none;
-        }
-        .color-options {
-            display: flex;
-            gap: 10px;
-            align-items: center;
-            margin-top: 10px;
-        }
-        .color-options input[type="radio"] {
-            appearance: none;
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-            outline: none;
-            cursor: pointer;
-            border: 2px solid #656565;
-            transition: transform 0.2s ease-in-out;
-        }
-        .color-options input[type="radio"]:hover {
-            transform: scale(1.15);
-        }
-        .color-options input[type="radio"]:checked {
-            border: 4px solid #000000;
-            box-shadow: 0 0 6px rgba(0, 0, 0, 0.6);
-        }
-        .color-options input[type="radio"]#yellow {
-            background-color: #FFFF00;
-        }
-        .color-options input[type="radio"]#green {
-            background-color: #00FF00;
-        }
-        .color-options input[type="radio"]#orange{
-            background-color: #FFA500;
-        }
-        #startGameBtn {
-            background-color: #01691e;
-            color: #fff;
-            border: 4px solid #000;
-            padding: 10px 20px;
-            font-size: 1.5em;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-            margin-top: 30px;
-            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.4);
-            font-weight: 900;
-            width: 80%; /* Adjust button width for smaller screens */
-            max-width: 300px; /* Set a maximum button width */
-        }
-        #startGameBtn:hover {
-            background-color: #02a904;
-            transform: scale(1.08);
-            box-shadow: 7px 7px 12px rgba(0, 0, 0, 0.5);
-        }
-        #settings {
-            background-color: #000000;
-            color: #ffffff;
-            padding: 10px 10px;
-            font-size: 1.3rem;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.2s ease-in-out;
-            box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
-            border: 2px solid #0e0e0e;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: fixed;
-            top: 20px;
-            right: 20px; /* Adjust right positioning for better spacing on iPhones */
-            z-index: 10; /* Ensure it's above other elements */
-        }
-        #settings:hover {
-            background-color: #060606;
-            transform: scale(1.05);
-            box-shadow: 6px 6px 10px rgba(0, 0, 0, 0.3);
-        }
-        #settings i {
-            font-size: 1.5em;
-        }
+       body {
+    font-family: sans-serif;
+    margin: 0;
+    background: url(bg1.jpg) no-repeat center center / cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
 
-@media (max-width: 767px) { /* Target smaller tablets and phones */
+.settings-page {
+    background-color: #000000;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    border: 3px solid #383838;
+    width: 90%;
+    max-width: 500px;
+}
+
+.settings-page h1 {
+    font-size: 2.5em;
+    color: #ffffff;
+    margin-bottom: 30px;
+    text-shadow: 2px 2px #000;
+    font-weight: 600;
+}
+
+.settings-section {
+    margin-bottom: 30px;
+    text-align: left;
+    padding: 15px;
+    border: 2px solid #000000;
+    border-radius: 8px;
+    background-color: #ffffff;
+}
+
+.settings-section label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 800;
+    color: #000000;
+    font-size: 1.3em;
+}
+
+.settings-section select {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid #1a8f00;
+    border-radius: 8px;
+    font-size: 1.2em;
+    color: #ffffff;
+    background-color: #01691e;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    padding-right: 35px;
+    cursor: pointer;
+    font-weight: 700;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.settings-section select:focus {
+    outline: none;
+}
+
+.color-options {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.color-options input[type="radio"] {
+    appearance: none;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    outline: none;
+    cursor: pointer;
+    border: 2px solid #656565;
+    transition: transform 0.2s ease-in-out;
+}
+
+.color-options input[type="radio"]:hover {
+    transform: scale(1.15);
+}
+
+.color-options input[type="radio"]:checked {
+    border: 4px solid #000000;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.6);
+}
+
+.color-options input[type="radio"]#yellow {
+    background-color: #FFFF00;
+}
+
+.color-options input[type="radio"]#green {
+    background-color: #00FF00;
+}
+
+.color-options input[type="radio"]#orange {
+    background-color: #FFA500;
+}
+
+#startGameBtn {
+    background-color: #01691e;
+    color: #fff;
+    border: 4px solid #000;
+    padding: 10px 20px;
+    font-size: 1.5em;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    margin-top: 30px;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.4);
+    font-weight: 900;
+    width: 80%;
+    max-width: 300px;
+}
+
+#startGameBtn:hover {
+    background-color: #02a904;
+    transform: scale(1.08);
+    box-shadow: 7px 7px 12px rgba(0, 0, 0, 0.5);
+}
+
+#settings {
+    background-color: #000000;
+    color: #ffffff;
+    padding: 10px 10px;
+    font-size: 1.3rem;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease-in-out;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
+    border: 2px solid #0e0e0e;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 10;
+}
+
+#settings:hover {
+    background-color: #060606;
+    transform: scale(1.05);
+    box-shadow: 6px 6px 10px rgba(0, 0, 0, 0.3);
+}
+
+#settings i {
+    font-size: 1.5em;
+}
+
+@media (max-width: 767px) {
     body {
-        background-position: 30%; 
+        background-position: center;
     }
+
+    .settings-page {
+        padding: 15px;
+    }
+
     .settings-page h1 {
         font-size: 2em;
         margin-bottom: 20px;
     }
+
     .settings-section {
         padding: 10px;
         margin-bottom: 20px;
     }
+
     .settings-section label {
         font-size: 1.1em;
         margin-bottom: 5px;
     }
+
     .settings-section select {
         padding: 10px;
         font-size: 1em;
         padding-right: 30px;
     }
+
     .color-options {
         gap: 8px;
         margin-top: 8px;
     }
+
     .color-options input[type="radio"] {
         width: 24px;
         height: 24px;
     }
+
     #startGameBtn {
         font-size: 1.3em;
         padding: 8px 16px;
         margin-top: 20px;
     }
+
     #settings {
         font-size: 1.1rem;
         padding: 8px;
         right: 15px;
         top: 15px;
     }
+
     #settings i {
         font-size: 1.3em;
     }
 }
 
 @media (max-width: 480px) {
-    body {
-        background-position: 50% 30%; 
-        min-height: auto; 
-        padding-bottom: 20px; }
     .settings-page {
-        padding: 15px;
-        border-radius: 10px;
+        padding: 10px;
     }
+
     .settings-page h1 {
         font-size: 1.8em;
     }
+
     .settings-section {
         padding: 8px;
         margin-bottom: 15px;
     }
+
     .settings-section label {
         font-size: 1em;
     }
+
     .settings-section select {
         font-size: 0.9em;
         padding: 8px;
         padding-right: 25px;
     }
+
     .color-options {
         gap: 6px;
     }
+
     .color-options input[type="radio"] {
         width: 20px;
         height: 20px;
     }
+
     #startGameBtn {
         font-size: 1.1em;
         padding: 6px 12px;
         border-width: 3px;
         border-radius: 8px;
     }
+
     #settings {
         font-size: 1rem;
         padding: 6px;
         right: 10px;
         top: 10px;
     }
+
     #settings i {
         font-size: 1.2em;
     }
 }
 
-
-@media (width: 375px) and (height: 812px) { 
+@media (width: 375px) and (height: 812px) {
     body {
-        background-position: 50% 35%;
+        background-position: center 35%;
     }
 }
 
-@media (width: 414px) and (height: 896px) { 
+@media (width: 414px) and (height: 896px) {
     body {
-        background-position: 30%;
+        background-position: center 30%;
     }
 }
 
-@media (width: 390px) and (height: 844px) { 
+@media (width: 390px) and (height: 844px) {
     body {
-        background-position: 50% 32%;
+        background-position: center 32%;
     }
 }
 
-@media (width: 360px) and (height: 780px) { 
+@media (width: 360px) and (height: 780px) {
     body {
-        background-position: 50% 40%;
+        background-position: center 40%;
     }
 }
-
 
     </style>
 <body>
