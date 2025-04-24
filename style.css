@@ -56,14 +56,23 @@ body{
   transform: rotate(30deg);
 }
 
-
+.play-board .snake-body-segment {
+  width: 100%; 
+  height: 100%; 
+  margin: 2px;
+  background: rgb(12, 214, 1);
+}
 .play-board .head{
     background: rgb(12, 214, 1);
-    border-radius: 40%;
+    border-radius: 50%;
+    width: 100%; 
+  height: 100%; 
      
 }
 .play-board .special-food {
   background-color: gold; 
+  width: 100%;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -103,28 +112,19 @@ body{
 }
 
 
-/* And your moving glow animation rule: */
-@keyframes movingGlow {
-  0% {
-    box-shadow: 0 0 15px 5px rgba(255, 255, 255, 0.7), 0 0 30px 10px rgba(255, 255, 255, 0.5);
-  }
-  25% {
-    box-shadow: 10px 0 15px 5px rgba(255, 255, 255, 0.7), 20px 0 30px 10px rgba(255, 255, 255, 0.5);
-  }
-  50% {
-    box-shadow: 0 10px 15px 5px rgba(255, 255, 255, 0.7), 0 20px 30px 10px rgba(255, 255, 255, 0.5);
-  }
-  75% {
-    box-shadow: -10px 0 15px 5px rgba(255, 255, 255, 0.7), -20px 0 30px 10px rgba(255, 255, 255, 0.5);
-  }
-  100% {
-    box-shadow: 0 0 15px 5px rgba(255, 255, 255, 0.7), 0 0 30px 10px rgba(255, 255, 255, 0.5);
-  }
+#gameOverPopup.glow {
+  border: 10px solid; /* Solid border to apply color animation */
+  animation: attractive-color-cycle 7s linear infinite; /* Increased duration for smoother cycle */
 }
 
-.glow {
-  animation: movingGlow 1s linear infinite;
-  z-index: 1000;
+@keyframes attractive-color-cycle {
+  0% { border-color: #FF6B6B; /* Bright Coral */ }
+  16.66% { border-color: #FFD700; /* Golden Yellow */ }
+  33.32% { border-color: #3CB371; /* Medium Sea Green */ }
+  49.98% { border-color: #4682B4; /* Steel Blue */ }
+  66.64% { border-color: #9400D3; /* Dark Violet */ }
+  83.30% { border-color: #FF8C00; /* Dark Orange */ }
+  100% { border-color: #FF6B6B; /* Back to Bright Coral */ }
 }
   .controls {
     display: grid;
@@ -557,7 +557,7 @@ body{
 }
 
 
-@media (width: 375px) and (height: 812px) { /* iPhone X, XS, 11 Pro, 12 mini, 13 mini */
+@media (width: 375px) and (height: 812px) { 
   .wrapper {
       margin-top: -105px;
       width: 93vmin;

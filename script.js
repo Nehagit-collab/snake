@@ -7,8 +7,8 @@ const selfHitSound = document.getElementById("selfHitSound");
 const controls = document.querySelectorAll(".controls i");
 const startGameBtn = document.getElementById("startGameBtn");
 const replayBtn = document.getElementById("replayBtn");
-const exitBtn = document.getElementById('exit'); 
-const settingsBtn = document.getElementById('settings'); 
+const exitBtn = document.getElementById('exit');
+const settingsBtn = document.getElementById('settings');
 
 let gameOver = false;
 let foodX, foodY;
@@ -19,24 +19,23 @@ let setIntervalId;
 let score = 0;
 let specialFoodX, specialFoodY;
 let isSpecialFoodActive = false;
-let specialFoodDuration = 5000;
 let specialFoodTimer;
 let doubleFoodActive = false;
 let gameStarted = false;
+let specialFoodDuration = 6000;
+let gameSpeed = 125;
 
-let highscore = localStorage.getItem("high-score") || 0;
+let highscore = parseInt(localStorage.getItem("high-score")) || 0;
 highscoreElement.innerText = `HighScore : ${highscore}`;
+console.log("Initial High Score:", highscore);
 
-// Function to get query parameter by name
 function getQueryParam(name) {
     const urlParams = new URLSearchParams(window.location.search);
     return urlParams.get(name);
 }
 
-// Get the difficulty from the URL
 const difficulty = getQueryParam('difficulty');
-const snakeColor = getQueryParam('snakeColor') || 'green'; 
-let gameSpeed = 125; // Default speed
+const snakeColor = getQueryParam('snakeColor') || 'green';
 
 switch (difficulty) {
     case 'easy':
@@ -52,9 +51,8 @@ switch (difficulty) {
         gameSpeed = 40;
         break;
     default:
-        gameSpeed = 125; 
+        gameSpeed = 125;
 }
-
 
 const changeDirection = (e) => {
     if (!gameStarted) return;
@@ -80,7 +78,9 @@ const changeFoodPosition = () => {
         specialFoodX = Math.floor(Math.random() * 35) + 1;
         specialFoodY = Math.floor(Math.random() * 35) + 1;
         isSpecialFoodActive = true;
-        console.log("Special food spawned at:", specialFoodX, specialFoodY);
+        specialFoodSpawnTime = Date.now();
+        console.log("Special food spawned at:", specialFoodX, specialFoodY, "at:", specialFoodSpawnTime);
+        startSpecialFoodTimer();
     } else if (!isSpecialFoodActive) {
         foodX = Math.floor(Math.random() * 35) + 1;
         foodY = Math.floor(Math.random() * 35) + 1;
@@ -88,17 +88,14 @@ const changeFoodPosition = () => {
 };
 
 const updateScore = () => {
-    highscore = Math.max(score, localStorage.getItem("high-score") || 0);
-    localStorage.setItem("high-score", highscore);
     scoreElement.innerText = `Score : ${score}`;
-    highscoreElement.innerText = `HighScore : ${highscore}`;
+    // High score is updated only on game over if a new high score is achieved
 };
 
 const checkHighScore = () => {
-    console.log("Current Score: ", score);
-    console.log("Current High Score (from storage): ", localStorage.getItem("high-score") || 0);
-
-    if (score > (localStorage.getItem("high-score") || 0)) {
+    const storedHighScore = parseInt(localStorage.getItem("high-score")) || 0;
+    console.log("Current Score:", score, "Stored High Score:", storedHighScore);
+    if (score > storedHighScore) {
         console.log("New High Score Detected!");
         return true;
     }
@@ -112,37 +109,37 @@ const handleGameOver = () => {
     wallSound.play();
 
     const isNewHighScore = checkHighScore();
+    console.log("isNewHighScore:", isNewHighScore);
 
     const gameOverPopup = document.getElementById("gameOverPopup");
     const gameOverMessage = document.getElementById("gameOverMessage");
 
     let message = `Game Over! Your score: ${score}`;
 
-   if (isNewHighScore) {
-    message += "\nNew High Score! 🎉";
-    console.log("New High Score Message: ", message);
-    gameOverPopup.style.display = "flex";
-    gameOverPopup.classList.add("glow");
-    console.log("Glow class added to gameOverPopup");
-    setTimeout(() => {
-        gameOverPopup.classList.remove("glow");
-    }, 2000);
-    localStorage.setItem("high-score", score);
-    highscoreElement.innerText = `HighScore : ${score}`;
-} else {
-    message += `\nHigh Score: ${localStorage.getItem("high-score") || 0}`;
-    gameOverPopup.style.display = "flex";
-}
+    if (isNewHighScore) {
+        message += "\nNew High Score! 🎉";
+        console.log("New High Score Message:", message);
+        gameOverPopup.style.display = "flex";
+        gameOverPopup.classList.add("glow");
+        console.log("Glow class added to gameOverPopup");
+        setTimeout(() => {
+            gameOverPopup.classList.remove("glow");
+        }, 2000);
+        localStorage.setItem("high-score", score);
+        highscoreElement.innerText = `HighScore : ${score}`; // Update main display
+    } else {
+        message += `\nHigh Score: ${parseInt(localStorage.getItem("high-score")) || 0}`;
+        gameOverPopup.style.display = "flex";
+    }
 
-console.log("glow ended ");
-gameOverMessage.innerText = message;
-
+    console.log("glow ended");
+    gameOverMessage.innerText = message;
 };
 
 replayBtn.addEventListener("click", () => {
     document.getElementById("gameOverPopup").style.display = "none";
     resetGame();
-    startGame(); 
+    startGame();
 });
 
 controls.forEach(key => {
@@ -156,10 +153,13 @@ const initGame = () => {
     let htmlMarkup = `<div class ="food" style="grid-area:${foodY} / ${foodX}"></div>`;
 
     if (isSpecialFoodActive) {
+        const currentTime = Date.now();
+        const elapsedTime = currentTime - specialFoodSpawnTime;
+        const remainingTime = Math.max(0, specialFoodDuration - elapsedTime);
+        const remainingSeconds = Math.ceil(remainingTime / 1000);
         htmlMarkup += `<div class ="special-food" style="grid-area:${specialFoodY} / ${specialFoodX}">⭐</div>`;
     }
     if (snakeX === foodX && snakeY === foodY) {
-
         changeFoodPosition();
         snakeBody.push([snakeX, snakeY]);
         score += 10;
@@ -170,10 +170,10 @@ const initGame = () => {
         if (doubleFoodActive) {
             changeFoodPosition();
         }
+        console.log("Score after eating regular food:", score);
     }
 
     if (isSpecialFoodActive && snakeX === specialFoodX && snakeY === specialFoodY) {
-
         isSpecialFoodActive = false;
         doubleFoodActive = true;
         for (let i = 0; i < 1; i++) {
@@ -192,11 +192,10 @@ const initGame = () => {
             console.log("Double food effect ended.");
         }, specialFoodDuration);
         changeFoodPosition();
+        console.log("Score after eating special food:", score);
     }
 
-
     const currentSnakeLength = snakeBody.length;
-
     for (let i = currentSnakeLength - 1; i > 0; i--) {
         snakeBody[i] = snakeBody[i - 1];
     }
@@ -222,11 +221,8 @@ const initGame = () => {
             shakeBoard();
         }
     }
-
     playBoard.innerHTML = htmlMarkup;
-
 };
-
 
 changeFoodPosition();
 
@@ -234,15 +230,14 @@ const startGame = () => {
     if (!gameStarted) {
         resetGame();
         gameStarted = true;
-        setIntervalId = setInterval(initGame, gameSpeed); 
+        setIntervalId = setInterval(initGame, gameSpeed);
         if (startGameBtn) {
             startGameBtn.style.display = "none";
             startGameBtn.removeEventListener("click", startGame);
         }
-        document.addEventListener("keydown", changeDirection); 
+        document.addEventListener("keydown", changeDirection);
     }
 };
-
 
 if (startGameBtn) {
     startGameBtn.addEventListener("click", startGame);
@@ -253,13 +248,10 @@ let emotionTimeout;
 
 function changeSnakeEmotion(emotion, duration = 1000) {
     const emotionElement = document.getElementById("snakeEmotion");
-
     isEmotionActive = true;
-
     if (emotionTimeout) {
         clearTimeout(emotionTimeout);
     }
-
     if (emotion === "happy") {
         emotionElement.innerText = "😊";
     } else if (emotion === "sad") {
@@ -269,9 +261,7 @@ function changeSnakeEmotion(emotion, duration = 1000) {
     } else if (emotion === "excited") {
         emotionElement.innerText = "🤩";
     }
-
     console.log("Emotion set to:", emotion);
-
     emotionTimeout = setTimeout(() => {
         emotionElement.innerText = "";
         isEmotionActive = false;
@@ -281,7 +271,6 @@ function changeSnakeEmotion(emotion, duration = 1000) {
 function triggerFlash() {
     const board = document.querySelector('.play-board');
     board.classList.add('flash');
-
     setTimeout(() => {
         board.classList.remove('flash');
     }, 1000);
@@ -300,11 +289,9 @@ let isMuted = false;
 
 muteToggleBtn.addEventListener("click", () => {
     isMuted = !isMuted;
-
     eatSound.muted = isMuted;
     wallSound.muted = isMuted;
     selfHitSound.muted = isMuted;
-
     muteToggleBtn.innerHTML = isMuted ? "<i class='bx bx-volume-mute'></i>" : "<i class='bx bx-volume-full'></i>";
 });
 
@@ -313,9 +300,7 @@ let isPaused = false;
 
 pauseBtn.addEventListener("click", () => {
     if (!gameStarted) return;
-
     isPaused = !isPaused;
-
     if (isPaused) {
         clearInterval(setIntervalId);
         pauseBtn.innerHTML = "<i class='bx bx-play'></i>";
@@ -337,7 +322,7 @@ const resetGame = () => {
     specialFoodY = undefined;
     isSpecialFoodActive = false;
     doubleFoodActive = false;
-    updateScore();
+    updateScore(); // Reset displayed score
     changeFoodPosition();
     playBoard.innerHTML = `<div class ="food" style="grid-area:${foodY} / ${foodX}"></div>`;
     if (setIntervalId) {
@@ -346,15 +331,28 @@ const resetGame = () => {
     isPaused = false;
     pauseBtn.innerHTML = "<i class='bx bx-pause'></i>";
     gameStarted = false;
+    console.log("Game reset. High Score:", parseInt(localStorage.getItem("high-score")) || 0);
 };
 
 if (exitBtn) {
     exitBtn.addEventListener('click', function() {
-        window.location.href = 'index.html'; 
+        window.location.href = 'index.html';
     });
 }
 if (settingsBtn) {
     settingsBtn.addEventListener('click', function() {
-        window.location.href = 'settings.html'; 
+        window.location.href = 'settings.html';
     });
+}
+
+function startSpecialFoodTimer() {
+    if (specialFoodTimer) {
+        clearTimeout(specialFoodTimer);
+    }
+    specialFoodTimer = setTimeout(() => {
+        isSpecialFoodActive = false;
+        specialFoodX = undefined;
+        specialFoodY = undefined;
+        console.log("Special food timed out and disappeared.");
+    }, specialFoodDuration);
 }
