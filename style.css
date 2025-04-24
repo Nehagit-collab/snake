@@ -415,7 +415,7 @@ body{
     grid-template-columns: 40px 40px 40px;
     grid-template-rows: 40px 40px 40px;
     bottom: 80px;
-    left: 40%;
+    left: 33%;
   }
   #startGameBtn{
     padding: 10px 20px;
