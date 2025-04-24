@@ -360,3 +360,67 @@ body{
   transform: translate(-50%, -50%) scale(1.1);
   box-shadow: 7px 7px 12px rgba(0, 0, 0, 0.4);
 }
+
+@media (max-width: 600px){
+  .wrapper{
+    margin-top: -100px;
+    width: 90vmin;
+    height: 100vmin;
+    background: rgb(45, 41, 35);
+    border-radius: 20px;
+    display: flex;
+    overflow: hidden;
+    flex-direction: column;
+ }
+ .game-details{
+  font-size: 1rem;
+  font-weight: 500;
+}
+  #exit{
+   right:25px;
+   bottom: 30px;
+   font-size: 17px;
+   width: 80px;
+   height: 45px;
+  }
+  #settings {
+    right: 25px;
+    top: 40px;
+    width: 45px;
+    height: 45px;
+  }
+  #settings  i{
+    font-size: 25px;
+  }
+  #pauseBtn{
+    left: 25px;
+    top: 40px;
+    width: 45px;
+    height: 45px;
+  }
+  #pauseBtn i{
+    font-size: 35px;
+  }
+  #muteToggleBtn{
+  right: 80px;
+  top: 40px;
+  width: 45px;
+    height: 45px;
+  }
+  #muteToggleBtn i{
+    font-size: 27px;
+  }
+  .controls { 
+    display: grid;
+    grid-template-columns: 40px 40px 40px;
+    grid-template-rows: 40px 40px 40px;
+    bottom: 80px;
+    left: 40%;
+  }
+  #startGameBtn{
+    padding: 10px 20px;
+    left: 50%;
+    font-size: 20px;
+    text-align: center;  
+  }
+}
