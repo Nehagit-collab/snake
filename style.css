@@ -424,3 +424,248 @@ body{
     text-align: center;  
   }
 }
+@media (max-width: 320px) { /* Extra Small Phones */
+  .wrapper {
+      margin-top: -80px;
+      width: 95vmin;
+      height: 105vmin;
+      border-radius: 15px;
+  }
+
+  .game-details {
+      font-size: 0.8rem;
+  }
+
+  #exit {
+      right: 15px;
+      bottom: 20px;
+      font-size: 14px;
+      width: 60px;
+      height: 35px;
+  }
+
+  #settings {
+      right: 15px;
+      top: 20px;
+      width: 35px;
+      height: 35px;
+  }
+
+  #settings i {
+      font-size: 20px;
+  }
+
+  #pauseBtn {
+      left: 15px;
+      top: 20px;
+      width: 35px;
+      height: 35px;
+  }
+
+  #pauseBtn i {
+      font-size: 25px;
+  }
+
+  #muteToggleBtn {
+      right: 60px;
+      top: 20px;
+      width: 35px;
+      height: 35px;
+  }
+
+  #muteToggleBtn i {
+      font-size: 20px;
+  }
+
+  .controls {
+      grid-template-columns: 30px 30px 30px;
+      grid-template-rows: 30px 30px 30px;
+      bottom: 60px;
+      left: 25%;
+  }
+
+  #startGameBtn {
+      padding: 8px 16px;
+      font-size: 16px;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 600px) { /* Larger Phones (some Android) */
+  .wrapper {
+      margin-top: -110px;
+      width: 85vmin;
+      height: 95vmin;
+      border-radius: 22px;
+  }
+
+  .game-details {
+      font-size: 1.1rem;
+  }
+
+  #exit {
+      right: 30px;
+      bottom: 35px;
+      font-size: 18px;
+      width: 90px;
+      height: 50px;
+  }
+
+  #settings {
+      right: 30px;
+      top: 45px;
+      width: 50px;
+      height: 50px;
+  }
+
+  #settings i {
+      font-size: 28px;
+  }
+
+  #pauseBtn {
+      left: 30px;
+      top: 45px;
+      width: 50px;
+      height: 50px;
+  }
+
+  #pauseBtn i {
+      font-size: 40px;
+  }
+
+  #muteToggleBtn {
+      right: 90px;
+      top: 45px;
+      width: 50px;
+      height: 50px;
+  }
+
+  #muteToggleBtn i {
+      font-size: 30px;
+  }
+
+  .controls {
+      grid-template-columns: 45px 45px 45px;
+      grid-template-rows: 45px 45px 45px;
+      bottom: 90px;
+      left: 35%;
+  }
+
+  #startGameBtn {
+      padding: 12px 24px;
+      font-size: 22px;
+  }
+}
+
+
+@media (width: 375px) and (height: 812px) { /* iPhone X, XS, 11 Pro, 12 mini, 13 mini */
+  .wrapper {
+      margin-top: -105px;
+      width: 93vmin;
+      height: 103vmin;
+  }
+
+  #exit {
+      right: 22px;
+      bottom: 28px;
+      font-size: 16px;
+      width: 75px;
+      height: 42px;
+  }
+
+  #settings {
+      right: 22px;
+      top: 35px;
+      width: 42px;
+      height: 42px;
+  }
+
+  #settings i {
+      font-size: 24px;
+  }
+
+  #pauseBtn {
+      left: 22px;
+      top: 35px;
+      width: 42px;
+      height: 42px;
+  }
+
+  #pauseBtn i {
+      font-size: 32px;
+  }
+
+  #muteToggleBtn {
+      right: 75px;
+      top: 35px;
+      width: 42px;
+      height: 42px;
+  }
+
+  #muteToggleBtn i {
+      font-size: 24px;
+  }
+
+  .controls {
+      bottom: 75px;
+      left: 32%;
+  }
+}
+
+@media (width: 414px) and (height: 896px) { /* iPhone XR, 11 */
+  .wrapper {
+      margin-top: -115px;
+      width: 88vmin;
+      height: 98vmin;
+  }
+
+  #exit {
+      right: 28px;
+      bottom: 33px;
+      font-size: 17px;
+      width: 85px;
+      height: 48px;
+  }
+
+  #settings {
+      right: 28px;
+      top: 42px;
+      width: 48px;
+      height: 48px;
+  }
+
+  #settings i {
+      font-size: 26px;
+  }
+
+  #pauseBtn {
+      left: 28px;
+      top: 42px;
+      width: 48px;
+      height: 48px;
+  }
+
+  #pauseBtn i {
+      font-size: 38px;
+  }
+
+  #muteToggleBtn {
+      right: 85px;
+      top: 42px;
+      width: 48px;
+      height: 48px;
+  }
+
+  #muteToggleBtn i {
+      font-size: 28px;
+  }
+
+  .controls {
+      bottom: 85px;
+      left: 34%;
+  }
+
+  #startGameBtn {
+      font-size: 21px;
+  }
+}
+
